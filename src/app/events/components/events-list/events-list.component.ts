@@ -10,7 +10,7 @@ import { EventsPerDay } from '../../interfaces/events-per-day.interface';
 export class EventsListComponent implements OnInit {
 
   constructor(private eventsService: EventsService) {
-    this.eventsService.getEventsList().subscribe((events: EventsPerDay) => {
+    this.eventsService.getEventsList(2, 14).subscribe((events: EventsPerDay) => {
       console.log('🚀 ~ EventsListComponent ~ constructor ~ aux', events);
     });
   }
