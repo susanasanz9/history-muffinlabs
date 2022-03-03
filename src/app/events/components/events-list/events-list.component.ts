@@ -16,9 +16,14 @@ export class EventsListComponent implements OnInit {
   loading: boolean = true;
 
   constructor(private eventsService: EventsService) {
-    this.eventsService.getEventsList(2, 14).subscribe((events: EventsPerDay) => {
-      this.events = events.data.Births;
+    this.getEvents();
+  }
 
+  ngOnInit(): void {
+  }
+
+  getEvents(day?: number, month?: number) {
+    this.eventsService.getEventsList(2, 14).subscribe((events: EventsPerDay) => {
       events.data.Births.forEach((event: EventHistory) => {
         event.type = EventType.BIRTH;
         this.events.push(event);
@@ -33,9 +38,6 @@ export class EventsListComponent implements OnInit {
       });
       this.loading = false;
     });
-  }
-
-  ngOnInit(): void {
   }
 
 }

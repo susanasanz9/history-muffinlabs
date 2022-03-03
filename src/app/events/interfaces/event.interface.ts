@@ -6,7 +6,7 @@ export interface EventHistory {
 	no_year_html: string;
 	text: string;
 	year: string;
-	type: EventType
+	type?: EventType
 }
 
 export interface EventHistoryLink {
