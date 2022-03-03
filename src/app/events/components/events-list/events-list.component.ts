@@ -12,8 +12,8 @@ import { EventType } from '../../interfaces/event-type.enum';
 export class EventsListComponent implements OnInit {
 
   events: EventHistory[] = [];
-  pageSize: number = 10;
-  page: number = 1;
+  rows = ['year', 'type', 'text'];
+  loading: boolean = true;
 
   constructor(private eventsService: EventsService) {
     this.eventsService.getEventsList(2, 14).subscribe((events: EventsPerDay) => {
@@ -31,6 +31,7 @@ export class EventsListComponent implements OnInit {
         event.type = EventType.EVENT;
         this.events.push(event);
       });
+      this.loading = false;
     });
   }
 

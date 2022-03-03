@@ -2,10 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+import { QuibicTableComponent } from './components/quibic-table/quibic-table.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    QuibicTableComponent
+  ],
   imports: [
     CommonModule,
     NgbModule,
@@ -14,7 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
   exports: [
     CommonModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    QuibicTableComponent
   ]
 })
 export class SharedModule { }

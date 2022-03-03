@@ -1,0 +1,36 @@
+@import '_vars';
+
+.quibic-table {
+	overflow-x: scroll;
+	border-collapse: separate;
+    border-spacing: 0 10px;
+	margin: auto;
+	thead {
+		color: white;
+		background-color: $dark-color;
+		border-color: $dark-color;
+		height: 60px;
+		th {
+			text-transform: capitalize;
+		}
+	}
+	tbody {
+		tr {
+			background-color: white;
+			box-shadow: 0px 5px 12px -12px rgb(0 0 0 / 29%);
+		}
+	}
+	th, td {
+		padding: 15px 10px;
+	}
+}
+
+ngb-pagination ::ng-deep .page-item {
+	&.active .page-link {
+		background-color: $dark-color;
+		border-color: $dark-color;
+	}
+	&:not(.active)	.page-link {
+		color: $dark-color;
+	}
+}

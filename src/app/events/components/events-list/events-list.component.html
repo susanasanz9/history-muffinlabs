@@ -1,27 +1,7 @@
 <section>
-	<div class="container">
-		<div class="row">
-			<table class="events-table">
-				<thead>
-					<tr>
-						<th>Year</th>
-						<th>Text</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr *ngFor="let event of events | slice: (page-1) * pageSize : page * pageSize">
-						<td>{{event.year}}</td>
-						<td>{{event.type}}</td>
-						<td>{{event.text}}</td>
-						<td><i class="fa-solid fa-eye"></i></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<div class="row">
-			<ngb-pagination [(page)]="page"
-							[pageSize]="pageSize"
-							[collectionSize]="events.length"></ngb-pagination>
-		</div>
+	<div class="container"
+		 *ngIf="!loading">
+		<app-quibic-table [items]="events"
+						  [rows]="rows"></app-quibic-table>
 	</div>
 </section>

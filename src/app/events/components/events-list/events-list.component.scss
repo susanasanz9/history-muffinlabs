@@ -1,3 +1,9 @@
-.events-table {
-	border: 1px solid black;
+@import '_vars';
+
+section {
+	background-color: $bg-color;
+	.container {
+		min-height: 100vh;
+	}
 }
+
