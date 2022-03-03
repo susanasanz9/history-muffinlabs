@@ -4,7 +4,7 @@ import { EventsPerDay } from '../../interfaces/events-per-day.interface';
 import { EventHistory } from '../../interfaces/event.interface';
 import { EventType } from '../../interfaces/event-type.enum';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-events-list',
@@ -85,8 +85,6 @@ export class EventsListComponent implements OnInit {
   }
 
   viewDetail(idx: number) {
-    console.log('🚀 ~ EventsListComponent ~ viewDetail ~ this.viewDetailModal', this.viewDetailModal);
-
     this.open(this.viewDetailModal, idx);
   }
 
