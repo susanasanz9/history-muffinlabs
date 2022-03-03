@@ -3,8 +3,9 @@ import { EventsService } from '../../events.service';
 import { EventsPerDay } from '../../interfaces/events-per-day.interface';
 import { EventHistory } from '../../interfaces/event.interface';
 import { EventType } from '../../interfaces/event-type.enum';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-events-list',
@@ -30,10 +31,17 @@ export class EventsListComponent implements OnInit {
     year: ""
   }
 
+  dates: { startDate: Date, endDate: Date } = {
+    startDate: new Date(Date.now()),
+    endDate: new Date(Date.now())
+  }
+
   constructor(private eventsService: EventsService, private formBuilder: FormBuilder, private modalService: NgbModal) {
     this.getEvents();
     this.form = this.formBuilder.group({
-      type: this.formBuilder.array([], null)
+      type: this.formBuilder.array([], null),
+      startDate: [formatDate(this.dates.startDate, 'yyyy-MM-dd', 'en'), null],
+      endDate: [formatDate(this.dates.endDate, 'yyyy-MM-dd', 'en'), null]
     });
   }
 
@@ -50,9 +58,9 @@ export class EventsListComponent implements OnInit {
     this.filterEvents(this.form.value.type);
   }
 
-
-  getEvents(day?: number, month?: number) {
-    this.eventsService.getEventsList(2, 14).subscribe((events: EventsPerDay) => {
+  getEvents(month?: number, day?: number) {
+    this.loading = true;
+    this.eventsService.getEventsList(month, day).subscribe((events: EventsPerDay) => {
       events.data.Births.forEach((event: EventHistory) => {
         event.type = EventType.BIRTH;
         this.events.push(event);
@@ -91,6 +99,15 @@ export class EventsListComponent implements OnInit {
   open(viewModal: any, idx: number) {
     this.modalService.open(viewModal);
     this.eventDetail = this.filteredEvents[idx];
+  }
+
+  newStartDate() {
+    const date: Date = new Date(this.form.controls['startDate'].value);
+    this.getEvents(date.getMonth() + 1, date.getDate());
+  }
+
+  newEndDate() {
+    // TODO
   }
 
 }
