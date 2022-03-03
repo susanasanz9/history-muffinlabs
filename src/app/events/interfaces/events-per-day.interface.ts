@@ -1,8 +1,10 @@
+import { EventHistory } from './event.interface';
+
 export interface EventsPerDay {
 	data: {
-		Births: Event[],
-		Deaths: Event[],
-		Events: Event[]
+		Births: EventHistory[],
+		Deaths: EventHistory[],
+		Events: EventHistory[]
 	},
 	date: string,
 	url: string

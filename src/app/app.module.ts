@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SharedModule } from './shared/shared.module';
+import { EventsModule } from './events/events.module';
 
 @NgModule({
   declarations: [
@@ -11,7 +11,7 @@ import { SharedModule } from './shared/shared.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule
+    EventsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
