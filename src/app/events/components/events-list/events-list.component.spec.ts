@@ -5,6 +5,7 @@ import { EventsListComponent } from './events-list.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { EventsService } from '../../events.service';
 import { of } from 'rxjs';
+import { FormBuilder } from '@angular/forms';
 
 const eventsPerDayMock: EventsPerDay = {
   data: {
@@ -82,7 +83,8 @@ describe('EventsListComponent', () => {
         {
           provide: EventsService,
           useValue: eventsServiceMock
-        }
+        },
+        FormBuilder
       ]
     })
       .compileComponents();

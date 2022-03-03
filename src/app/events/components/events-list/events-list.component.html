@@ -1,7 +1,25 @@
 <section>
 	<div class="container"
 		 *ngIf="!loading">
-		<app-quibic-table [items]="events"
+		<div class="row">
+			<form class="form"
+				  [formGroup]="form">
+				<div class="d-flex">
+					<div *ngFor="let type of eventsType">
+						<label class='p-4'>
+							<input type="checkbox"
+								   class="form-check-input"
+								   [value]="type"
+								   (change)="onCheckboxChange($event)" />
+							{{type}}
+						</label>
+					</div>
+				</div>
+
+			</form>
+
+		</div>
+		<app-quibic-table [items]="filteredEvents"
 						  [rows]="rows"></app-quibic-table>
 	</div>
 </section>
