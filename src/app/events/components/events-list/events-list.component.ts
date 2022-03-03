@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { EventsService } from '../../events.service';
+import { EventsPerDay } from '../../interfaces/events-per-day.interface';
 
 @Component({
   selector: 'app-events-list',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventsListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private eventsService: EventsService) {
+    this.eventsService.getEventsList().subscribe((events: EventsPerDay) => {
+      console.log('🚀 ~ EventsListComponent ~ constructor ~ aux', events);
+    });
+  }
 
   ngOnInit(): void {
   }
