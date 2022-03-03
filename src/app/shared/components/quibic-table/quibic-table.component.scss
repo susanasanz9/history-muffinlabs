@@ -23,6 +23,9 @@
 	th, td {
 		padding: 15px 10px;
 	}
+	i {
+		cursor: pointer;
+	}
 }
 
 ngb-pagination ::ng-deep .page-item {

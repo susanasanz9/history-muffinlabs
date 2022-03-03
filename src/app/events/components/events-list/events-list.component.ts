@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { EventsService } from '../../events.service';
 import { EventsPerDay } from '../../interfaces/events-per-day.interface';
 import { EventHistory } from '../../interfaces/event.interface';
 import { EventType } from '../../interfaces/event-type.enum';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-events-list',
@@ -12,6 +13,8 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 })
 export class EventsListComponent implements OnInit {
 
+  @ViewChild('viewDetailModal') viewDetailModal: any;
+
   events: EventHistory[] = [];
   filteredEvents: EventHistory[] = [];
   rows = ['year', 'type', 'text'];
@@ -19,7 +22,15 @@ export class EventsListComponent implements OnInit {
   eventsType: string[] = Object.values(EventType);
   form: FormGroup;
 
-  constructor(private eventsService: EventsService, private formBuilder: FormBuilder) {
+  eventDetail: EventHistory = {
+    html: "",
+    links: [],
+    no_year_html: "",
+    text: "",
+    year: ""
+  }
+
+  constructor(private eventsService: EventsService, private formBuilder: FormBuilder, private modalService: NgbModal) {
     this.getEvents();
     this.form = this.formBuilder.group({
       type: this.formBuilder.array([], null)
@@ -71,6 +82,17 @@ export class EventsListComponent implements OnInit {
         }))
       });
     }
+  }
+
+  viewDetail(idx: number) {
+    console.log('🚀 ~ EventsListComponent ~ viewDetail ~ this.viewDetailModal', this.viewDetailModal);
+
+    this.open(this.viewDetailModal, idx);
+  }
+
+  open(viewModal: any, idx: number) {
+    this.modalService.open(viewModal);
+    this.eventDetail = this.filteredEvents[idx];
   }
 
 }

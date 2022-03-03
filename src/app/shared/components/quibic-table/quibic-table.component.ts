@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-quibic-table',
@@ -13,11 +13,17 @@ export class QuibicTableComponent implements OnInit {
   @Input() pageSize: number = 10;
   @Input() showPaginator: boolean = true;
   @Input() paginatorMaxSize: number = 5;
+  @Output() viewClicked = new EventEmitter<number>();
+
   page: number = 1;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onClickView(idx: number) {
+    this.viewClicked.emit(idx);
   }
 
 }

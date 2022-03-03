@@ -8,9 +8,12 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr *ngFor="let item of items | slice: (page-1) * pageSize : page * pageSize">
+				<tr *ngFor="let item of items | slice: (page-1) * pageSize : page * pageSize; let i = index">
 					<td *ngFor="let row of rows">{{item[row]}}</td>
-					<td *ngIf="showRow"><i class="fa-solid fa-eye"></i></td>
+					<td *ngIf="showRow">
+						<i class="fa-solid fa-eye"
+						   (click)='onClickView(i)'></i>
+					</td>
 				</tr>
 			</tbody>
 		</table>
